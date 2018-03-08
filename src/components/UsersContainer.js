@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import UserTile from './UserTile';
 
 export default class UsersContainer extends Component {
   constructor(props) {
@@ -21,8 +22,12 @@ export default class UsersContainer extends Component {
 
   render() {
     return (
-      <div>
-        Users
+      <div className='users-container'>
+        {this.state.users.map((user) => {
+          return(
+            <UserTile user={user} key={user.name} />
+          );
+        })}
       </div>
     );
   }
