@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const UserTile = ({user}) =>
-  <div className='user-tile' key={user.name}>
-    <h4>{user.name}</h4>
-  </div>
+export default class UserTile extends Component {
+  handleClick = () => { this.props.onClick(this.props.user.id) }
+  handleDelete = () => { this.props.onDelete(this.props.user.id) }
 
-
-export default UserTile;
+  render() {
+    return(
+      <div className='userTile'>
+        <span className='deleteUserButton' onClick={this.handleDelete}>x</span>
+        <h4 onClick={this.handleClick}>{this.props.user.name}</h4>
+      </div>
+    );
+  }
+}

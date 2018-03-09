@@ -21,9 +21,32 @@
   flex-wrap: wrap;
 }
 
-.user-tile {
+.userTile {
   height: 5em;
   width:5em;
   border: 3px solid black;
   margin:2em;
+}
+
+.newUserButton {
+  font-size: 1em;
+  cursor: pointer;
+  margin: 2em;
+  background: green;
+  height: 5em;
+  width:5em;
+  color:white;
+}
+
+.deleteUserButton {
+  visibility: hidden;
+  float:right;
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  color: red;
+}
+
+.userTile:hover .deleteUserButton {
+  visibility: visible;
 }
