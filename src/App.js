@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import UsersContainer from './components/UsersContainer';
+import CoursesContainer from './components/CoursesContainer';
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
           <h1 className="App-title">golf tracker</h1>
         </header>
         <UsersContainer />
+        <CoursesContainer />
       </div>
     );
   }

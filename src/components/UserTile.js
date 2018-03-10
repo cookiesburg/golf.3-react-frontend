@@ -7,7 +7,7 @@ export default class UserTile extends Component {
   render() {
     return(
       <div className='userTile'>
-        <span className='deleteUserButton' onClick={this.handleDelete}>x</span>
+        <span className='deleteButton' onClick={this.handleDelete}>x</span>
         <h4 onClick={this.handleClick}>{this.props.user.name}</h4>
       </div>
     );

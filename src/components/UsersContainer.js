@@ -59,9 +59,6 @@ export default class UsersContainer extends Component {
         <div>
           <button className='newUserButton' onClick={this.addNewUser} >+</button>
         </div>
-        <span>
-          {this.state.notification}
-        </span>
         {this.state.users.map((user) => {
           if(this.state.editingUserId === user.id) {
             return( <UserForm user={user} key={user.id} updateUser={this.updateUser} /> );
