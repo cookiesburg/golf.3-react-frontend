@@ -16,16 +16,30 @@
 
 /*****UsersContainer*****/
 
-.users-container {
+
+.homeContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.usernamesContainer {
   width: 100%;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  margin-bottom: 5em;
 }
 .userTile {
   height: 6em;
   width:6em;
   border: 3px solid black;
+  margin:2em;
+}
+.currentUserTile {
+  height: 6em;
+  width:6em;
+  border: 3px solid green;
   margin:2em;
 }
 .newUserButton {
@@ -47,6 +61,14 @@
 }
 .userTile:hover .deleteButton {
   visibility: visible;
+}
+
+.scoresContainer {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
 }
 
 /*****CoursesContainer******/

@@ -3,6 +3,7 @@ import axios from 'axios';
 import UserTile from './UserTile';
 import UserForm from './UserForm';
 import update from 'immutability-helper';
+import ScoresContainer from './ScoresContainer';
 
 export default class UsersContainer extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class UsersContainer extends Component {
     this.state = {
       users:[],
       editingUserId: null,
+      currentUser: null,
     }
   }
 
@@ -49,24 +51,27 @@ export default class UsersContainer extends Component {
   }
 
   enableEditing = (id) => {
-    this.setState({editingUserId: id})
+    this.setState({editingUserId: id, currentUser: id})
   }
 
 
   render() {
     return (
-      <div className='users-container'>
-        <div>
-          <button className='newUserButton' onClick={this.addNewUser} >+</button>
-        </div>
-        {this.state.users.map((user) => {
-          if(this.state.editingUserId === user.id) {
-            return( <UserForm user={user} key={user.id} updateUser={this.updateUser} /> );
-          } else {
-            return( <UserTile user={user} key={user.id} onClick={this.enableEditing}
+      <div className='homeContainer'>
+        <div className='usernamesContainer'>
+          <div>
+            <button className='newUserButton' onClick={this.addNewUser} >+</button>
+          </div>
+          {this.state.users.map((user) => {
+            if(this.state.editingUserId === user.id) {
+              return( <UserForm user={user} key={user.id} updateUser={this.updateUser} /> );
+            } else {
+              return( <UserTile user={user} key={user.id} onClick={this.enableEditing}
                       onDelete={this.deleteUser} /> );
-          }
-        })}
+            }
+          })}
+        </div>
+        <ScoresContainer />
       </div>
     );
   }
