@@ -50,8 +50,17 @@ export default class UsersContainer extends Component {
     .catch(error => console.log(error));
   }
 
+  selectUser = (id) => {
+    this.enableEditing(id);
+    this.updateCurrentUser(id);
+  }
+
   enableEditing = (id) => {
-    this.setState({editingUserId: id, currentUser: id})
+    this.setState({editingUserId: id})
+  }
+
+  updateCurrentUser = (id) => {
+    this.setState({currentUser: id})
   }
 
 
@@ -66,12 +75,12 @@ export default class UsersContainer extends Component {
             if(this.state.editingUserId === user.id) {
               return( <UserForm user={user} key={user.id} updateUser={this.updateUser} /> );
             } else {
-              return( <UserTile user={user} key={user.id} onClick={this.enableEditing}
+              return( <UserTile user={user} key={user.id} onClick={this.selectUser}
                       onDelete={this.deleteUser} /> );
             }
           })}
         </div>
-        <ScoresContainer />
+        <ScoresContainer currentUser={this.state.currentUser} />
       </div>
     );
   }

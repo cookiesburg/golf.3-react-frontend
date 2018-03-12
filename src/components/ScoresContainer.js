@@ -10,8 +10,17 @@ export default class ScoresContainer extends Component {
     };
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:3001/api/v1/scores.json')
+  getInitialState() {
+    axios.get(`http://localhost:3001/api/v1/scores.json`)
+    .then(response => {
+      console.log(response);
+      this.setState({scores: response.data})
+    })
+    .catch(error => console.log(error));
+  }
+
+  componentWillReceiveProps() {
+    axios.get(`http://localhost:3001/api/v1/users/${this.props.currentUser}/scores.json`)
     .then(response => {
       console.log(response);
       this.setState({scores: response.data})
@@ -26,7 +35,7 @@ export default class ScoresContainer extends Component {
           return(
             <div key={score.id}>
               <div>{score.strokes}</div>
-              <div>{score.user}</div>
+              <div>{score.user_id}</div>
             </div>
           );
         })}
