@@ -28,7 +28,7 @@ export default class UserForm extends Component {
 
   render() {
     return (
-      <div className='currentUserTile'>
+      <div className='userTile'>
         <form onBlur={this.handleBlur} >
           <input className='input' type='text' name='name' placeholder='Enter Username'
             value={this.state.name} onChange={this.handleInput} />

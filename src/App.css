@@ -16,7 +16,6 @@
 
 /*****UsersContainer*****/
 
-
 .homeContainer {
   width: 100%;
   display: flex;
@@ -69,6 +68,15 @@
   flex-direction: column;
   justify-content: center;
   border: 1px solid black;
+}
+
+.roundContainer {
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  margin: .3em;
+  background-color: black;
+  color: white;
 }
 
 /*****CoursesContainer******/

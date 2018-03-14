@@ -4,6 +4,7 @@ import UserTile from './UserTile';
 import UserForm from './UserForm';
 import update from 'immutability-helper';
 import ScoresContainer from './ScoresContainer';
+import CoursesContainer from './CoursesContainer';
 
 export default class UsersContainer extends Component {
   constructor(props) {
@@ -12,8 +13,13 @@ export default class UsersContainer extends Component {
     this.state = {
       users:[],
       editingUserId: null,
-      currentUser: null,
+      currentUser: 1,
+      courseList: [],
     }
+  }
+
+  updateCourseList = (courses) => {
+    this.setState({ courseList: courses});
   }
 
   componentDidMount() {
@@ -50,11 +56,6 @@ export default class UsersContainer extends Component {
     .catch(error => console.log(error));
   }
 
-  selectUser = (id) => {
-    this.enableEditing(id);
-    this.updateCurrentUser(id);
-  }
-
   enableEditing = (id) => {
     this.setState({editingUserId: id})
   }
@@ -75,12 +76,13 @@ export default class UsersContainer extends Component {
             if(this.state.editingUserId === user.id) {
               return( <UserForm user={user} key={user.id} updateUser={this.updateUser} /> );
             } else {
-              return( <UserTile user={user} key={user.id} onClick={this.selectUser}
+              return( <UserTile user={user} key={user.id} onSelect={this.updateCurrentUser} onClick={this.enableEditing}
                       onDelete={this.deleteUser} /> );
             }
           })}
         </div>
-        <ScoresContainer currentUser={this.state.currentUser} />
+        <ScoresContainer currentUser={this.state.currentUser} courseList={this.state.courseList}/>
+        <CoursesContainer passCourseList={this.updateCourseList} />
       </div>
     );
   }
