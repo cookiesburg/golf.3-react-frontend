@@ -6,18 +6,16 @@ export default class ScoreForm extends Component {
     super(props);
     this.state = {
       strokes: null,
-      selectedCourse: null,
+      selectedCourse: 18,
     };
 
   }
 
   selectCourse(){
-    console.log(this.refs.courseSelector.value);
     this.setState( {selectedCourse: this.refs.courseSelector.value} );
   }
 
   enterStrokes(){
-    console.log(this.refs.typeStrokes.value);
     this.setState({strokes: this.refs.typeStrokes.value});
   }
 
@@ -26,8 +24,8 @@ export default class ScoreForm extends Component {
     axios.post(
       `http://localhost:3001/api/v1/scores`, {score: score})
     .then(response => {
+      console.log(response);
       this.props.updateScores(response.data)
-
     })
     .catch(error => console.log(error))
   }
@@ -37,9 +35,10 @@ export default class ScoreForm extends Component {
       return <option key={course.id} value={course.id}>{course.name}</option> ;
     }));
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input ref='typeStrokes' onChange={(e) => {this.enterStrokes(); } } />
+      <form className='scoreForm'>
+        <input ref='typeStrokes' placeholder='enter score' onChange={(e) => {this.enterStrokes(); } } />
         <select ref='courseSelector' onChange={(e) => { this.selectCourse(); } }>{courseOptions}</select>
+        <button onClick={this.handleSubmit}>submit</button>
       </form>
     );
   }

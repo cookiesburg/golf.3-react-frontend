@@ -39,15 +39,24 @@ export default class ScoresContainer extends Component {
   render() {
     return(
       <div className='scoresContainer' >
-        <ScoreForm courseList={this.props.courseList} currentUser={this.props.currentUser} updateScores={this.updateScores}/>
-        {this.state.scores.map((score) => {
-          return(
-            <div className='roundContainer' key={score.id}>
-              <div>{score.strokes}</div>
-              <div>{score.differential}</div>
-            </div>
-          );
-        })}
+        <div>
+          <h2>{this.props.currentUser}</h2>
+          <h3>handicap: {(this.state.scores).length}</h3>
+        </div>
+        <div className='scoringFormList'>
+          <ScoreForm courseList={this.props.courseList} currentUser={this.props.currentUser} updateScores={this.updateScores}/>
+
+          {this.state.scores.map((score) => {
+            return(
+              <div className='roundsList' key={score.id}>
+                <div className='score'>{score.strokes}</div>
+                <div className='course'>{score.course_id}</div>
+                <div className='diff'>{score.differential}</div>
+              </div>
+            );
+          })}
+
+        </div>
       </div>
     );
   }

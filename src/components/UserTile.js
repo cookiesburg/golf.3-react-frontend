@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
 export default class UserTile extends Component {
+  constructor(props) {
+    super(props);
+  }
 
 
   /*
@@ -13,10 +16,9 @@ export default class UserTile extends Component {
 
   render() {
     return(
-      <div className= 'userTile'
-        onClick={this.handleSelect}>
-        <span className='deleteButton' onClick={this.handleDelete}>x</span>
+      <div className = 'userTile' onClick={this.handleSelect}>
         <h4 onClick={this.handleClick}>{this.props.user.name}</h4>
+        <span className='deleteButton' onClick={this.handleDelete}>x</span>
       </div>
     );
   }

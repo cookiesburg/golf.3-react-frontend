@@ -1,9 +1,14 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
 .App-header {
+  width: 100%;
   background-color: #222;
   height: 150px;
   padding: 20px;
@@ -17,9 +22,11 @@
 /*****UsersContainer*****/
 
 .homeContainer {
-  width: 100%;
+  width: 70%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .usernamesContainer {
@@ -30,24 +37,25 @@
   margin-bottom: 5em;
 }
 .userTile {
-  height: 6em;
+  height: 3em;
   width:6em;
-  border: 3px solid black;
-  margin:2em;
+  border-radius: 10%;
+  background-color: lightblue;
+  margin:1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.currentUserTile {
-  height: 6em;
-  width:6em;
-  border: 3px solid green;
-  margin:2em;
-}
+
 .newUserButton {
   font-size: 1em;
   cursor: pointer;
-  margin: 2em;
-  background: green;
-  height: 6em;
-  width:6em;
+  margin: 1em;
+  background: black;
+  border-radius: 10%;
+  height: 4em;
+  width:4em;
   color:white;
 }
 .deleteButton {
@@ -63,20 +71,51 @@
 }
 
 .scoresContainer {
-  width: inherit;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 1px solid black;
-}
-
-.roundContainer {
-  width: 60%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
-  margin: .3em;
+  border: 1px solid black;
+  padding: 2em;
+}
+
+.scoringFormList {
+  width: 60%;
+}
+
+.roundsList {
+  width: 100%;
+  display: flex;
+  margin: .2em;
+  padding: .2em;
   background-color: black;
   color: white;
+  border-radius: 5px;
+}
+
+.scoreForm {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+input, select, button {
+  font-size: 14px;
+}
+
+.score {
+  width: 10%;
+}
+.course {
+  width: 80%;
+}
+
+button {
+  font-weight: bold;
+  border-radius: 10%;
+  background-color: purple;
+  color: white;
+  padding: 6px;
+  cursor: pointer;
 }
 
 /*****CoursesContainer******/
@@ -88,19 +127,27 @@
   flex-wrap: wrap;
 }
 .courseTile {
-  border:3px solid black;
-  height: 8em;
-  width:8em;
-  margin: 2em;
+  min-height: 8em;
+  width:12em;
+  margin: 1em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10%;
+  background-color: lightpink;
+  color: black;
 }
+
 .addCourseButton {
   font-size: 1em;
   cursor: pointer;
   margin: 2em;
-  background: green;
-  height: 8em;
-  width:8em;
+  background: black;
+  height: 10em;
+  width:10em;
   color:white;
+  border-radius: 10%;
 }
 .courseTile:hover .deleteButton {
   visibility: visible;
