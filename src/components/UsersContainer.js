@@ -3,6 +3,8 @@ import axios from 'axios';
 import UserTile from './UserTile';
 import UserForm from './UserForm';
 import update from 'immutability-helper';
+import ScoresContainer from './ScoresContainer';
+import CoursesContainer from './CoursesContainer';
 
 export default class UsersContainer extends Component {
   constructor(props) {
@@ -11,7 +13,13 @@ export default class UsersContainer extends Component {
     this.state = {
       users:[],
       editingUserId: null,
+      currentUser: 1,
+      courseList: [],
     }
+  }
+
+  updateCourseList = (courses) => {
+    this.setState({ courseList: courses});
   }
 
   componentDidMount() {
@@ -40,7 +48,6 @@ export default class UsersContainer extends Component {
   deleteUser = (id) => {
     axios.delete(`http://localhost:3001/api/v1/users/${id}`)
     .then(response => {
-      console.log(response)
       const userIndex = this.state.users.findIndex(x => x.id === id)
       const users = update(this.state.users, { $splice: [[userIndex, 1]]})
       this.setState({users: users})
@@ -52,21 +59,30 @@ export default class UsersContainer extends Component {
     this.setState({editingUserId: id})
   }
 
+  updateCurrentUser = (id) => {
+    this.setState({currentUser: id})
+  }
+
+
 
   render() {
     return (
-      <div className='users-container'>
-        <div>
-          <button className='newUserButton' onClick={this.addNewUser} >+</button>
-        </div>
-        {this.state.users.map((user) => {
-          if(this.state.editingUserId === user.id) {
-            return( <UserForm user={user} key={user.id} updateUser={this.updateUser} /> );
-          } else {
-            return( <UserTile user={user} key={user.id} onClick={this.enableEditing}
+      <div className='homeContainer'>
+        <div className='usernamesContainer'>
+          <div>
+            <button className='newUserButton' onClick={this.addNewUser} >+</button>
+          </div>
+          {this.state.users.map((user) => {
+            if(this.state.editingUserId === user.id) {
+              return( <UserForm user={user} key={user.id} updateUser={this.updateUser} /> );
+            } else {
+              return( <UserTile user={user} currentUser={this.state.currentUser} key={user.id} onSelect={this.updateCurrentUser} onClick={this.enableEditing}
                       onDelete={this.deleteUser} /> );
-          }
-        })}
+            }
+          })}
+        </div>
+        <ScoresContainer users={this.state.users} currentUser={this.state.currentUser} courseList={this.state.courseList} users={this.state.users}/>
+        <CoursesContainer passCourseList={this.updateCourseList} />
       </div>
     );
   }

@@ -13,7 +13,7 @@ export default class UserForm extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  handleBlur = () => {
+  handleSubmit = () => {
     const name = {name: this.state.name}
     axios.put(
       `http://localhost:3001/api/v1//users/${this.props.user.id}`,
@@ -28,10 +28,11 @@ export default class UserForm extends Component {
 
   render() {
     return (
-      <div className='user-tile'>
-        <form onBlur={this.handleBlur} >
+      <div className='userTile'>
+        <form>
           <input className='input' type='text' name='name' placeholder='Enter Username'
             value={this.state.name} onChange={this.handleInput} />
+            <button onClick={this.handleSubmit}>save</button>
         </form>
       </div>
     );

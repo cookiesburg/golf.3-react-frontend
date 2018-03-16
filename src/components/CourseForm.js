@@ -15,7 +15,7 @@ export default class CourseForm extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  handleBlur = () => {
+  handleSubmit = () => {
     const course = {name: this.state.name, rating:this.state.rating, slope:this.state.slope }
     axios.put(
       `http://localhost:3001/api/v1/courses/${this.props.course.id}`,
@@ -29,11 +29,12 @@ export default class CourseForm extends Component {
   render() {
     return (
       <div className='courseTile'>
-        <form onBlur={this.handleBlur}>
+        <form>
           <input className='input' type='text' name='name' placeholder='Course Name & Tees'
             value={this.state.name} onChange={this.handleInput} />
           <input className='input' name='rating' placeholder='course rating' value={this.state.rating} onChange={this.handleInput} />
           <input className='input' name='slope' placeholder='course slope' value={this.state.slope} onChange={this.handleInput} />
+          <button onClick={this.handleSubmit}>Save</button>
         </form>
       </div>
     );

@@ -13,21 +13,30 @@ export default class CoursesContainer extends Component {
       editingCourseId: null,
     };
 
+    this.pushCourseList = this.pushCourseList.bind(this);
+  }
+
+  pushCourseList = () => {
+    const courseList = this.state.courses;
+    this.props.passCourseList(courseList);
   }
 
   componentDidMount() {
     axios.get('http://localhost:3001/api/v1/courses.json')
     .then(response => {
-      this.setState({courses: response.data})
+      this.setState({courses: response.data});
+      this.props.passCourseList(this.state.courses);
     })
     .catch(error => console.log(error));
   }
+
 
   addNewCourse = () => {
     axios.post('http://localhost:3001/api/v1/courses', {course: {name: '', rating: '', slope: ''}})
     .then(response => {
       const courses = update(this.state.courses, { $splice: [[0, 0, response.data]]})
       this.setState({courses: courses, editingCourseId: response.data.id });
+      this.props.passCourseList(this.state.courses);
     })
     .catch(error => console.log(error));
   }
@@ -35,7 +44,8 @@ export default class CoursesContainer extends Component {
   updateCourse = (course) => {
     const courseIndex = this.state.courses.findIndex(x => x.id === course.id)
     const courses = update(this.state.courses, {[courseIndex]: { $set: course }})
-    this.setState({courses})
+    this.setState({courses});
+    this.props.passCourseList(this.state.courses);
   }
 
   deleteCourse = (id) => {
@@ -44,7 +54,8 @@ export default class CoursesContainer extends Component {
       console.log(response)
       const courseIndex = this.state.courses.findIndex(x => x.id === id)
       const courses = update(this.state.courses, { $splice: [[courseIndex, 1]]})
-      this.setState({courses: courses})
+      this.setState({courses: courses});
+      this.props.passCourseList(this.state.courses);
     })
     .catch(error => console.log(error));
   }
@@ -52,6 +63,7 @@ export default class CoursesContainer extends Component {
   enableEditing = (id) => {
     this.setState({editingCourseId: id})
   }
+
 
   render() {
     return(
