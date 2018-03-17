@@ -81,7 +81,7 @@ export default class UsersContainer extends Component {
             }
           })}
         </div>
-        <ScoresContainer users={this.state.users} currentUser={this.state.currentUser} courseList={this.state.courseList} users={this.state.users}/>
+        <ScoresContainer users={this.state.users} currentUser={this.state.currentUser} courseList={this.state.courseList} />
         <CoursesContainer passCourseList={this.updateCourseList} />
       </div>
     );

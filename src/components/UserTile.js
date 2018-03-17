@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
 
 export default class UserTile extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-
   /*
     constructor to keep state of currentUser so I can style the div differently???
   */

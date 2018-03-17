@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import ScoreForm from './ScoreForm';
 import update from 'immutability-helper';
+import ScoreComponent from './ScoreComponent';
 
 export default class ScoresContainer extends Component {
   constructor(props) {
@@ -45,17 +46,11 @@ export default class ScoresContainer extends Component {
         </div>
         <div className='scoringFormList'>
           <ScoreForm courseList={this.props.courseList} currentUser={this.props.currentUser} updateScores={this.updateScores}/>
-
-          {this.state.scores.map((score) => {
-            return(
-              <div className='roundsList' key={score.id}>
-                <div className='score'>{score.strokes}</div>
-                <div className='course'>{score.course_id}</div>
-                <div className='diff'>{score.differential}</div>
-              </div>
-            );
-          })}
-
+          <div>
+            {this.state.scores.map((score) => {
+              return( <ScoreComponent score={score} />);
+            })}
+          </div>
         </div>
       </div>
     );
