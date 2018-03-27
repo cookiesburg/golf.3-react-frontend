@@ -7,13 +7,21 @@ import UsersContainer from './UsersContainer';
 export default AppContainer extends Component {
   constructor(props) {
   super(props);
-  this.setState {
-    users:,
-    selectedUser:,
-    courses: ,
-    selectedCourse:,
-    scores:,
+  this.state {
+    users: [],
+    selectedUser: null,
+    courses: [],
+    scores: [],
   }
+
+  componentDidMount() {
+    axios.get('http://localhost:3001/api/v1/users.json')
+    .then(response => {
+      this.setState({users: response.data})
+    })
+    .catch(error => console.log(error));
+  }
+  
 
   render() {
     return(
