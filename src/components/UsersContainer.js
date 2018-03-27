@@ -13,7 +13,6 @@ export default class UsersContainer extends Component {
     this.state = {
       users:[],
       editingUserId: null,
-      currentUser: 1,
       courseList: [],
     }
   }
@@ -59,15 +58,15 @@ export default class UsersContainer extends Component {
     this.setState({editingUserId: id})
   }
 
-  updateCurrentUser = (id) => {
-    this.setState({currentUser: id})
-  }
-
-
 
   render() {
     return (
       <div className='homeContainer'>
+      <ScoresContainer users={this.state.users} currentUser={this.state.currentUser} courseList={this.state.courseList} scores={this.state.scores} userHandicap={this.state.userHandicap} />
+      <CoursesContainer passCourseList={this.updateCourseList} />
+        <header>
+        <h3>Current Friends</h3>
+        </header>
         <div className='usernamesContainer'>
           <div>
             <button className='newUserButton' onClick={this.addNewUser} >+</button>
@@ -76,13 +75,11 @@ export default class UsersContainer extends Component {
             if(this.state.editingUserId === user.id) {
               return( <UserForm user={user} key={user.id} updateUser={this.updateUser} /> );
             } else {
-              return( <UserTile user={user} currentUser={this.state.currentUser} key={user.id} onSelect={this.updateCurrentUser} onClick={this.enableEditing}
+              return( <UserTile user={user} currentUser={this.state.currentUser} key={user.id} onClick={this.enableEditing}
                       onDelete={this.deleteUser} /> );
             }
           })}
         </div>
-        <ScoresContainer users={this.state.users} currentUser={this.state.currentUser} courseList={this.state.courseList} users={this.state.users}/>
-        <CoursesContainer passCourseList={this.updateCourseList} />
       </div>
     );
   }

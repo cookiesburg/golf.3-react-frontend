@@ -6,12 +6,13 @@ export default class CourseTile extends Component {
 
   render() {
     return (
-      <div className='courseTile'>
+      <tr className='courseTile'>
+        <td onClick={this.handleClick}><strong>{this.props.course.name}</strong></td>
+        <td onClick={this.handleClick}>rating: {this.props.course.rating}</td>
+        <td onClick={this.handleClick}>slope: {this.props.course.slope}
         <span className='deleteButton' onClick={this.handleDelete}>x</span>
-        <p onClick={this.handleClick}><strong>{this.props.course.name}</strong></p>
-        <p onClick={this.handleClick}>rating: {this.props.course.rating}</p>
-        <p onClick={this.handleClick}>slope: {this.props.course.slope}</p>
-      </div>
+        </td>
+      </tr>
     );
   }
 }

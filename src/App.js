@@ -8,6 +8,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">GOLF FRIENDS</h1>
+          <h3>Post Scores and Track Your Handicap</h3>
         </header>
         <UsersContainer />
       </div>

@@ -68,17 +68,27 @@ export default class CoursesContainer extends Component {
   render() {
     return(
       <div className='coursesContainer'>
-        <div>
-          <button className='addCourseButton' onClick={this.addNewCourse} >+</button>
+        <header>
+          <h3>Courses</h3>
+        </header>
+        <div className='coursesTable'>
+          <table>
+          {this.state.courses.map((course) => {
+            if(this.state.editingCourseId === course.id) {
+              return(
+                <CourseForm course={course} key={course.id} updateCourse={this.updateCourse} />
+              );
+            } else {
+              return (
+                <CourseTile course={course} key={course.id} onClick={this.enableEditing} onDelete={this.deleteCourse} />
+              );
+            }
+          })}
+          </table>
+          <div>
+            <button className='addCourseButton' onClick={this.addNewCourse} >+</button>
+          </div>
         </div>
-        {this.state.courses.map((course) => {
-          if(this.state.editingCourseId === course.id) {
-            return(<CourseForm course={course} key={course.id} updateCourse={this.updateCourse} />);
-          } else {
-            return (<CourseTile course={course} key={course.id} onClick={this.enableEditing}
-                      onDelete={this.deleteCourse} />);
-          }
-        })}
       </div>
     );
   }
